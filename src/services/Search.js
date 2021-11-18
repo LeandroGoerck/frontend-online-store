@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getCategories, getProductsFromCategoryAndQuery } from './api';
+import { getCategories } from './api';
 
 class Search extends React.Component {
   constructor() {
