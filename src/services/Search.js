@@ -9,6 +9,7 @@ class Search extends React.Component {
       categories: [],
       searchInput: '',
       results: [],
+      category: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSearchButton = this.handleSearchButton.bind(this);
@@ -22,12 +23,16 @@ class Search extends React.Component {
 
   handleChange({ target }) {
     const { value, name } = target;
-    this.setState({ [name]: value });
+    this.setState({ [name]: value }, () => {
+      if (name === 'category') {
+        this.handleSearchButton();
+      }
+    });
   }
 
   handleSearchButton() {
-    const { searchInput } = this.state;
-    getProductsFromCategoryAndQuery('', searchInput)
+    const { searchInput, category } = this.state;
+    getProductsFromCategoryAndQuery(category, searchInput)
       .then((data) => {
         const productList = data.results.map((result) => ({
           title: result.title,
@@ -72,7 +77,9 @@ class Search extends React.Component {
                     id={ category.id }
                     type="radio"
                     name="category"
+                    value={ category.id }
                     data-testid="category"
+                    onClick={ handleChange }
                   />
                   { category.name }
                 </label>
