@@ -93,7 +93,12 @@ class Search extends React.Component {
               key={ result.id }
               data-testid="product"
             >
-              <span>{result.title}</span>
+              <Link
+                data-testid="product-detail-link"
+                to={ `/product/${result.id}` }
+              >
+                {result.title}
+              </Link>
               <img src={ result.thumbnail } alt={ result.title } />
               <p>{`R$${result.price.toFixed(2)}`}</p>
             </div>
