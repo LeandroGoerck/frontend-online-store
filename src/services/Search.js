@@ -10,6 +10,7 @@ class Search extends React.Component {
       searchInput: '',
       results: [],
       category: '',
+      shoppingCart: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSearchButton = this.handleSearchButton.bind(this);
@@ -89,13 +90,20 @@ class Search extends React.Component {
 
         <div>
           { results.length > 0 && results.map((result) => (
-            <div
+            <div 
               key={ result.id }
               data-testid="product"
             >
-              <span>{result.title}</span>
+              <Link 
+                data-testid="product-detail-link"
+                to={ `/product/${result.id}` }
+                
+              >
+                {result.title}
+              </Link>
               <img src={ result.thumbnail } alt={ result.title } />
               <p>{`R$${result.price.toFixed(2)}`}</p>
+              <button></button>
             </div>
           )) }
         </div>
