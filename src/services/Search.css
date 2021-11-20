@@ -20,8 +20,8 @@ body {
 
 .category-conteiner {
   background-color: whitesmoke;
+  height: 700px;
   margin-left: 30px;
-  max-height: 700px;
   padding: 20px;
   width: 300px;
 }
@@ -47,8 +47,8 @@ body {
 
 .item-card {
   background-color: white;
-  height: 250px;
   margin: 10px;
+  max-height: 250px;
   padding: 20px;
   text-align: center;
   width: 250px;
