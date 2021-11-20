@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getProductById } from './api';
+import './ProductPage.css';
 
 class ProductPage extends React.Component {
   constructor() {
@@ -23,8 +24,7 @@ class ProductPage extends React.Component {
     const { productInfo } = this.state;
     const { title, price, thumbnail } = productInfo;
     return (
-      <div>
-        <p>oi</p>
+      <div className="detail-conteiner">
         <img src={ thumbnail } alt={ title } />
         <p data-testid="product-detail-name">{title}</p>
         <p>{price}</p>
