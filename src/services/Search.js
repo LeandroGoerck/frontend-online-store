@@ -64,7 +64,6 @@ class Search extends React.Component {
       this.setState({ cart: [...cart, cartObj] });
       localStorage.setItem('cart', JSON.stringify([...cart, cartObj]));
     }
-
   }
 
   render() {
