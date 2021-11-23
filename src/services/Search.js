@@ -11,9 +11,11 @@ class Search extends React.Component {
       searchInput: '',
       results: [],
       category: '',
+      cart: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSearchButton = this.handleSearchButton.bind(this);
+    this.addItemToCart = this.addItemToCart.bind(this);
   }
 
   componentDidMount() {
@@ -45,9 +47,20 @@ class Search extends React.Component {
       });
   }
 
+  addItemToCart({ target }) {
+    const { value } = target;
+    const { results, cart } = this.state;
+    const cartObj = results.find((result) => result.id === value);
+    console.log(cartObj);
+    this.setState({ cart: [...cart, cartObj] });
+    // localStorage.setItem({ cart: cart });
+    // const saveFavoriteSongs = (favoriteSongs) => localStorage
+    localStorage.setItem('cart', JSON.stringify([...cart, cartObj]));
+  }
+
   render() {
     const { categories, searchInput, results } = this.state;
-    const { handleChange, handleSearchButton } = this;
+    const { handleChange, handleSearchButton, addItemToCart } = this;
     return (
       <div className="search-page">
         <section className="search-conteiner">
@@ -106,24 +119,35 @@ class Search extends React.Component {
           </section>
 
           <section className="search-result-conteiner">
-            <div>
-              { results.length > 0 && results.map((result) => (
-                <div
-                  className="item-card"
-                  key={ result.id }
-                  data-testid="product"
+
+            { results.length > 0 && results.map((result) => (
+              <div
+                className="item-card"
+                key={ result.id }
+                data-testid="product"
+              >
+                <img src={ result.thumbnail } alt={ result.title } />
+                <Link
+                  data-testid="product-detail-link"
+                  to={ `/product/${result.id}` }
                 >
-                  <Link
-                    data-testid="product-detail-link"
-                    to={ `/product/${result.id}` }
-                  >
-                    {result.title}
-                  </Link>
-                  <img src={ result.thumbnail } alt={ result.title } />
-                  <p>{`R$${result.price.toFixed(2)}`}</p>
-                </div>
-              )) }
-            </div>
+                  {result.title}
+                </Link>
+
+                <p>{`R$${result.price.toFixed(2)}`}</p>
+
+                <button
+                  type="button"
+                  data-testid="product-add-to-cart"
+                  value={ result.id }
+                  onClick={ addItemToCart }
+                >
+                  Adicionar ao Carrinho
+                </button>
+
+              </div>
+            )) }
+
           </section>
         </div>
 

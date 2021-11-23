@@ -23,7 +23,7 @@ body {
   height: 700px;
   margin-left: 30px;
   padding: 20px;
-  width: 300px;
+  width: 330px;
 }
 
 .cart-button {
@@ -34,24 +34,28 @@ body {
 
 .search-result-conteiner {
   background-color: whitesmoke;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
   margin: 20px;
   padding: 20px;
   width: 100%;
 }
 
-.search-result-conteiner div {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-}
-
 .item-card {
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+  justify-content: space-between;
   margin: 10px;
-  max-height: 250px;
   padding: 20px;
   text-align: center;
   width: 250px;
+}
+
+.item-card:hover {
+  box-shadow: 4px 14px 22px -4px rgba(0, 0, 0, 0.49);
 }
 
 .item-card img {
