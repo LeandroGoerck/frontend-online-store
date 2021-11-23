@@ -1,26 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class ShoppingCart extends Component {
-  constructor() {
-    super();
-    this.state = { cart: [] };
-    this.saveLocalToState = this.saveLocalToState.bind(this);
-  }
-
-  componentDidMount() {
-    const { saveLocalToState } = this;
-    if (localStorage.getItem('cart').length > 0) {
-      const cartList = JSON.parse(localStorage.getItem('cart'));
-      saveLocalToState(cartList);
-    }
-  }
-
-  saveLocalToState(cartList) {
-    this.setState({ cart: cartList });
-  }
-
   render() {
-    const { cart } = this.state;
+    const { cart } = this.props;
     return (
       <div>
         {cart.length > 0
@@ -29,7 +12,11 @@ class ShoppingCart extends Component {
               <img src={ item.thumbnail } alt={ item.title } />
               <p>{`R$${item.price.toFixed(2)}`}</p>
               <p data-testid="shopping-cart-product-name">{item.title}</p>
-              <strong data-testid="shopping-cart-product-quantity">{cart.length}</strong>
+              <strong
+                data-testid="shopping-cart-product-quantity"
+              >
+                {item.quantity}
+              </strong>
             </div>
           )))
 
@@ -38,5 +25,9 @@ class ShoppingCart extends Component {
     );
   }
 }
+
+ShoppingCart.propTypes = {
+  cart: PropTypes.instanceOf(Array).isRequired,
+};
 
 export default ShoppingCart;

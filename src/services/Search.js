@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { getCategories, getProductsFromCategoryAndQuery } from './api';
 import './Search.css';
 
@@ -51,16 +52,25 @@ class Search extends React.Component {
     const { value } = target;
     const { results, cart } = this.state;
     const cartObj = results.find((result) => result.id === value);
-    console.log(cartObj);
-    this.setState({ cart: [...cart, cartObj] });
-    // localStorage.setItem({ cart: cart });
-    // const saveFavoriteSongs = (favoriteSongs) => localStorage
-    localStorage.setItem('cart', JSON.stringify([...cart, cartObj]));
+
+    cartObj.quantity = 1;
+
+    const localStorageCartList = JSON.parse(localStorage.getItem('cart'));
+    const alreadyExists = localStorageCartList.find((item) => (item.id === value));
+    if (alreadyExists) {
+      localStorageCartList.find((item) => (item.id === value)).quantity += 1;
+      localStorage.setItem('cart', JSON.stringify(localStorageCartList));
+    } else {
+      this.setState({ cart: [...cart, cartObj] });
+      localStorage.setItem('cart', JSON.stringify([...cart, cartObj]));
+    }
   }
 
   render() {
     const { categories, searchInput, results } = this.state;
-    const { handleChange, handleSearchButton, addItemToCart } = this;
+    const { handleChange, handleSearchButton } = this;
+    const { addCartItem } = this.props;
+
     return (
       <div className="search-page">
         <section className="search-conteiner">
@@ -140,7 +150,7 @@ class Search extends React.Component {
                   type="button"
                   data-testid="product-add-to-cart"
                   value={ result.id }
-                  onClick={ addItemToCart }
+                  onClick={ addCartItem }
                 >
                   Adicionar ao Carrinho
                 </button>
@@ -155,5 +165,10 @@ class Search extends React.Component {
     );
   }
 }
+
+Search.propTypes = {
+  addCartItem: PropTypes.func.isRequired,
+  // cart: PropTypes.instanceOf(Array).isRequired,
+};
 
 export default Search;
