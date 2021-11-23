@@ -6,6 +6,10 @@ import ShoppingCart from './services/ShoppingCart';
 import ProductPage from './services/ProductPage';
 
 class App extends React.Component {
+  componentDidMount() {
+    localStorage.setItem('cart', '[]');
+  }
+
   render() {
     return (
       <BrowserRouter>
