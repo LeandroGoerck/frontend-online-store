@@ -7,6 +7,7 @@ import ProductPage from './services/ProductPage';
 import { getProductById } from './services/api';
 
 class App extends React.Component {
+
   constructor() {
     super();
     this.state = { cart: [] };

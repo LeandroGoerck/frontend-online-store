@@ -52,6 +52,7 @@ class Search extends React.Component {
     const { value } = target;
     const { results, cart } = this.state;
     const cartObj = results.find((result) => result.id === value);
+
     cartObj.quantity = 1;
 
     const localStorageCartList = JSON.parse(localStorage.getItem('cart'));
@@ -63,12 +64,14 @@ class Search extends React.Component {
       this.setState({ cart: [...cart, cartObj] });
       localStorage.setItem('cart', JSON.stringify([...cart, cartObj]));
     }
+
   }
 
   render() {
     const { categories, searchInput, results } = this.state;
     const { handleChange, handleSearchButton } = this;
     const { addCartItem } = this.props;
+
     return (
       <div className="search-page">
         <section className="search-conteiner">

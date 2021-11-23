@@ -2,16 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class ShoppingCart extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = { cart: [] };
-  //   this.saveLocalToState = this.saveLocalToState.bind(this);
-  // }
-
-  // saveLocalToState(cartList) {
-  //   this.setState({ cart: cartList });
-  // }
-
   render() {
     const { cart } = this.props;
     return (
