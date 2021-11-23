@@ -9,8 +9,10 @@ class ShoppingCart extends Component {
 
   componentDidMount() {
     const { saveLocalToState } = this;
-    const cartList = JSON.parse(localStorage.getItem('cart'));
-    saveLocalToState(cartList);
+    if (localStorage.getItem('cart').length > 0) {
+      const cartList = JSON.parse(localStorage.getItem('cart'));
+      saveLocalToState(cartList);
+    }
   }
 
   saveLocalToState(cartList) {
@@ -21,15 +23,17 @@ class ShoppingCart extends Component {
     const { cart } = this.state;
     return (
       <div>
-        <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-        {cart.map((item, index) => (
-          <div key={ index }>
-            <img src={ item.thumbnail } alt={ item.title } />
-            <p>{`R$${item.price.toFixed(2)}`}</p>
-            <p data-testid="shopping-cart-product-name">{item.title}</p>
-            <strong data-testid="shopping-cart-product-quantity">{cart.length}</strong>
-          </div>
-        ))}
+        {cart.length > 0
+          ? (cart.map((item, index) => (
+            <div key={ index }>
+              <img src={ item.thumbnail } alt={ item.title } />
+              <p>{`R$${item.price.toFixed(2)}`}</p>
+              <p data-testid="shopping-cart-product-name">{item.title}</p>
+              <strong data-testid="shopping-cart-product-quantity">{cart.length}</strong>
+            </div>
+          )))
+
+          : <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>}
       </div>
     );
   }
