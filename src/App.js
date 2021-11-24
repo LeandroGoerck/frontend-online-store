@@ -11,10 +11,7 @@ class App extends React.Component {
     super();
     this.state = { cart: [] };
     this.addCartItem = this.addCartItem.bind(this);
-  }
-
-  componentDidMount() {
-    localStorage.setItem('cart', '[]');
+    this.decreaseQuantity = this.decreaseQuantity.bind(this);
   }
 
   addCartItem({ target }) {
@@ -26,18 +23,32 @@ class App extends React.Component {
         if (exists) {
           cart.find((item) => (item.id === value)).quantity += 1;
           this.setState({ cart });
-          console.log('incrementa');
         } else {
-          console.log('adiciona objeto inteiro');
           productObj.quantity = 1;
           this.setState({ cart: [...cart, productObj] });
         }
       });
   }
 
+  decreaseQuantity({ target }) {
+    const { value } = target;
+    const { cart } = this.state;
+    getProductById(value)
+      .then(() => {
+        const obj = cart.find((item) => (item.id === value));
+        if (obj) {
+          const quant = obj.quantity;
+          if (quant > 1) {
+            cart.find((item) => (item.id === value)).quantity -= 1;
+          }
+          this.setState({ cart });
+        }
+      });
+  }
+
   render() {
     const { cart } = this.state;
-    const { addCartItem } = this;
+    const { addCartItem, decreaseQuantity } = this;
     return (
       <BrowserRouter>
         <Switch>
@@ -64,6 +75,8 @@ class App extends React.Component {
                 { ...props }
                 cart={ cart }
                 addCartItem={ addCartItem }
+                increaseQuantity={ addCartItem }
+                decreaseQuantity={ decreaseQuantity }
               />
             ) }
           />

@@ -22,7 +22,8 @@ class Search extends React.Component {
   componentDidMount() {
     getCategories()
       .then((category) => this
-        .setState({ categories: category }, () => console.log(category)));
+        .setState({ categories: category }));
+    // .setState({ categories: category }, () => console.log(category)));
   }
 
   handleChange({ target }) {
