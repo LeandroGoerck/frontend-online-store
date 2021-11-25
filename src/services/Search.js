@@ -12,7 +12,6 @@ class Search extends React.Component {
       searchInput: '',
       results: [],
       category: '',
-      cart: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSearchButton = this.handleSearchButton.bind(this);

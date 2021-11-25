@@ -22,10 +22,15 @@ class App extends React.Component {
         const exists = cart.find((item) => (item.id === value));
         if (exists) {
           cart.find((item) => (item.id === value)).quantity += 1;
-          this.setState({ cart });
+          this.setState(() => ({
+            cart,
+          }));
         } else {
           productObj.quantity = 1;
-          this.setState({ cart: [...cart, productObj] });
+          // this.setState({ cart: [...cart, productObj] });
+          this.setState(() => ({
+            cart: [...cart, productObj],
+          }));
         }
       });
   }
