@@ -17,7 +17,9 @@ class App extends React.Component {
   addCartItem({ target }) {
     const { value } = target;
     const { cart } = this.state;
-    getProductById(value)
+    getProductById('MLB918281211')
+    // MLB923744806 pequeno principe
+    // MLB918281211 diario de anne frank
       .then((productObj) => {
         const exists = cart.find((item) => (item.id === value));
         if (exists) {
@@ -32,9 +34,13 @@ class App extends React.Component {
           // this.setState((previousState) => ({
           //   cart: [...previousState.cart, productObj],
           // }));
-          this.setState((prevState) => {
-            this.setState({ cart: [...prevState.cart, productObj] });
-          });
+          // this.setState((prevState) => {
+          //  this.setState({ cart: [productObj, ...prevState.cart] });
+          //  this.state({ cart: [...prevState.cart, productObj] });
+          //  console.log(productObj);
+          // });
+          this.setState((prevState) => ({ cart: [...prevState.cart, productObj] }));
+          console.log(productObj);
         }
       });
   }

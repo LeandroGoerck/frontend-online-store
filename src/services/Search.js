@@ -15,7 +15,7 @@ class Search extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSearchButton = this.handleSearchButton.bind(this);
-    this.addItemToCart = this.addItemToCart.bind(this);
+    // this.addItemToCart = this.addItemToCart.bind(this);
   }
 
   componentDidMount() {
@@ -48,23 +48,23 @@ class Search extends React.Component {
       });
   }
 
-  addItemToCart({ target }) {
-    const { value } = target;
-    const { results, cart } = this.state;
-    const cartObj = results.find((result) => result.id === value);
+  // addItemToCart({ target }) {
+  //   const { value } = target;
+  //   const { results, cart } = this.state;
+  //   const cartObj = results.find((result) => result.id === value);
 
-    cartObj.quantity = 1;
+  //   cartObj.quantity = 1;
 
-    const localStorageCartList = JSON.parse(localStorage.getItem('cart'));
-    const alreadyExists = localStorageCartList.find((item) => (item.id === value));
-    if (alreadyExists) {
-      localStorageCartList.find((item) => (item.id === value)).quantity += 1;
-      localStorage.setItem('cart', JSON.stringify(localStorageCartList));
-    } else {
-      this.setState({ cart: [...cart, cartObj] });
-      localStorage.setItem('cart', JSON.stringify([...cart, cartObj]));
-    }
-  }
+  //   const localStorageCartList = JSON.parse(localStorage.getItem('cart'));
+  //   const alreadyExists = localStorageCartList.find((item) => (item.id === value));
+  //   if (alreadyExists) {
+  //     localStorageCartList.find((item) => (item.id === value)).quantity += 1;
+  //     localStorage.setItem('cart', JSON.stringify(localStorageCartList));
+  //   } else {
+  //     this.setState({ cart: [...cart, cartObj] });
+  //     localStorage.setItem('cart', JSON.stringify([...cart, cartObj]));
+  //   }
+  // }
 
   render() {
     const { categories, searchInput, results } = this.state;

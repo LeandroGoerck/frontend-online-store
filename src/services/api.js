@@ -10,21 +10,21 @@ export async function getProductsFromCategoryAndQuery(categoryId, query) {
     .catch((error) => error);
 }
 
-// export async function getProductById(productId) {
-//   return fetch(`https://api.mercadolibre.com/items/${productId}`)
-//     .then((data) => (data.json()
-//       .then((obj) => (
-//         { id: obj.id,
-//           title: obj.title,
-//           thumbnail: obj.thumbnail,
-//           price: obj.price,
-//         }
-//       ))))
-//     .catch((error) => error);
-// }
-
 export async function getProductById(productId) {
   return fetch(`https://api.mercadolibre.com/items/${productId}`)
-    .then((data) => data.json())
+    .then((data) => (data.json()
+      .then((obj) => (
+        { id: obj.id,
+          title: obj.title,
+          thumbnail: obj.thumbnail,
+          price: obj.price,
+        }
+      ))))
     .catch((error) => error);
 }
+
+// export async function getProductById(productId) {
+//   return fetch(`https://api.mercadolibre.com/items/${productId}`)
+//     .then((data) => data.json())
+//     .catch((error) => error);
+// }
