@@ -9,9 +9,9 @@ class ShoppingCart extends Component {
     return (
       <div className="cart-conteiner">
         {cart.length > 0
-          ? (cart.map((item) => (
+          ? (cart.map((item, index) => (
             <CartProduct
-              key={ item.id }
+              key={ index }
               item={ item }
               increaseQuantity={ increaseQuantity }
               decreaseQuantity={ decreaseQuantity }

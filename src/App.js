@@ -25,12 +25,16 @@ class App extends React.Component {
           this.setState(() => ({
             cart,
           }));
+          console.log('adiciona novo');
         } else {
           productObj.quantity = 1;
           // this.setState({ cart: [...cart, productObj] });
-          this.setState(() => ({
-            cart: [...cart, productObj],
-          }));
+          // this.setState((previousState) => ({
+          //   cart: [...previousState.cart, productObj],
+          // }));
+          this.setState((prevState) => {
+            this.setState({ cart: [...prevState.cart, productObj] });
+          });
         }
       });
   }
