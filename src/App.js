@@ -4,7 +4,7 @@ import Search from './services/Search';
 import './App.css';
 import ShoppingCart from './services/ShoppingCart';
 import ProductPage from './services/ProductPage';
-import { getProductById, getProductsFromCategoryAndQuery } from './services/api';
+import { getProductsFromCategoryAndQuery } from './services/api';
 
 class App extends React.Component {
   constructor() {
