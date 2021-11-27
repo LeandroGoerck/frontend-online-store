@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { getCategories, getProductsFromCategoryAndQuery } from './api';
+import { getCategories } from './api';
 import './Search.css';
 
 class Search extends React.Component {
@@ -9,12 +9,9 @@ class Search extends React.Component {
     super();
     this.state = {
       categories: [],
-      searchInput: '',
-      results: [],
-      category: '',
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSearchButton = this.handleSearchButton.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
+    // this.handleSearchButton = this.handleSearchButton.bind(this);
     // this.addItemToCart = this.addItemToCart.bind(this);
   }
 
@@ -25,28 +22,28 @@ class Search extends React.Component {
     // .setState({ categories: category }, () => console.log(category)));
   }
 
-  handleChange({ target }) {
-    const { value, name } = target;
-    this.setState({ [name]: value }, () => {
-      if (name === 'category') {
-        this.handleSearchButton();
-      }
-    });
-  }
+  // handleChange({ target }) {
+  //   const { value, name } = target;
+  //   this.setState({ [name]: value }, () => {
+  //     if (name === 'category') {
+  //       this.handleSearchButton();
+  //     }
+  //   });
+  // }
 
-  handleSearchButton() {
-    const { searchInput, category } = this.state;
-    getProductsFromCategoryAndQuery(category, searchInput)
-      .then((data) => {
-        const productList = data.results.map((result) => ({
-          title: result.title,
-          id: result.id,
-          thumbnail: result.thumbnail,
-          price: result.price,
-        }));
-        this.setState({ results: productList });
-      });
-  }
+  // handleSearchButton() {
+  //   const { searchInput, category } = this.state;
+  //   getProductsFromCategoryAndQuery(category, searchInput)
+  //     .then((data) => {
+  //       const productList = data.results.map((result) => ({
+  //         title: result.title,
+  //         id: result.id,
+  //         thumbnail: result.thumbnail,
+  //         price: result.price,
+  //       }));
+  //       this.setState({ results: productList });
+  //     });
+  // }
 
   // addItemToCart({ target }) {
   //   const { value } = target;
@@ -67,9 +64,16 @@ class Search extends React.Component {
   // }
 
   render() {
-    const { categories, searchInput, results } = this.state;
-    const { handleChange, handleSearchButton } = this;
-    const { addCartItem } = this.props;
+    const {
+      handleChange,
+      handleSearchButton,
+      addCartItem,
+      results,
+      searchInput,
+      // category,
+    } = this.props;
+
+    const { categories } = this.state;
 
     return (
       <div className="search-page">
@@ -168,6 +172,12 @@ class Search extends React.Component {
 
 Search.propTypes = {
   addCartItem: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleSearchButton: PropTypes.func.isRequired,
+  results: PropTypes.arrayOf(PropTypes.object).isRequired,
+  // categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+  searchInput: PropTypes.string.isRequired,
+  // category: PropTypes.string.isRequired,
   // cart: PropTypes.instanceOf(Array).isRequired,
 };
 
